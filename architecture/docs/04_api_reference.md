@@ -38,7 +38,7 @@ The FalkorDB MCP Server is a Model Context Protocol (MCP) implementation that pr
 
 ### FalkorDBService
 
-**File**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:4](../../../src/services/falkordb.service.ts#L4)
+**File**: [src/services/falkordb.service.ts:4](../../../src/services/falkordb.service.ts#L4)
 
 **Description**: Singleton service that manages FalkorDB connections and provides methods for executing graph queries. Handles automatic connection initialization, retry logic, and connection pooling.
 
@@ -57,7 +57,7 @@ constructor()
 
 **Returns**: `FalkorDBService` instance
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:7](../../../src/services/falkordb.service.ts#L7)
+**Source**: [src/services/falkordb.service.ts:7](../../../src/services/falkordb.service.ts#L7)
 
 ---
 
@@ -104,7 +104,7 @@ const result = await falkorDBService.executeQuery(
 );
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:33](../../../src/services/falkordb.service.ts#L33)
+**Source**: [src/services/falkordb.service.ts:33](../../../src/services/falkordb.service.ts#L33)
 
 ---
 
@@ -133,7 +133,7 @@ console.log('Available graphs:', graphs);
 // Output: ['graph1', 'graph2', 'socialNetwork']
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:53](../../../src/services/falkordb.service.ts#L53)
+**Source**: [src/services/falkordb.service.ts:53](../../../src/services/falkordb.service.ts#L53)
 
 ---
 
@@ -160,7 +160,7 @@ process.on('SIGTERM', async () => {
 });
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:67](../../../src/services/falkordb.service.ts#L67)
+**Source**: [src/services/falkordb.service.ts:67](../../../src/services/falkordb.service.ts#L67)
 
 ---
 
@@ -182,7 +182,7 @@ private async init(): Promise<void>
 - Uses `config.falkorDB.host`, `config.falkorDB.port`, `config.falkorDB.username`, and `config.falkorDB.password`
 - Automatically retries on failure with 5-second delay
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:11](../../../src/services/falkordb.service.ts#L11)
+**Source**: [src/services/falkordb.service.ts:11](../../../src/services/falkordb.service.ts#L11)
 
 ---
 
@@ -202,7 +202,7 @@ import { falkorDBService } from './services/falkordb.service';
 const graphs = await falkorDBService.listGraphs();
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:76](../../../src/services/falkordb.service.ts#L76)
+**Source**: [src/services/falkordb.service.ts:76](../../../src/services/falkordb.service.ts#L76)
 
 ---
 
@@ -210,7 +210,7 @@ const graphs = await falkorDBService.listGraphs();
 
 ### MCPController
 
-**File**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts:10](../../../src/controllers/mcp.controller.ts#L10)
+**File**: [src/controllers/mcp.controller.ts:10](../../../src/controllers/mcp.controller.ts#L10)
 
 **Description**: Handles MCP protocol requests, providing endpoints for context queries, metadata retrieval, and graph listing. Formats all responses according to MCP standards with appropriate metadata.
 
@@ -287,7 +287,7 @@ POST /api/mcp/context
 }
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts:14](../../../src/controllers/mcp.controller.ts#L14)
+**Source**: [src/controllers/mcp.controller.ts:14](../../../src/controllers/mcp.controller.ts#L14)
 
 ---
 
@@ -341,7 +341,7 @@ GET /api/mcp/metadata
 }
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts:64](../../../src/controllers/mcp.controller.ts#L64)
+**Source**: [src/controllers/mcp.controller.ts:64](../../../src/controllers/mcp.controller.ts#L64)
 
 ---
 
@@ -398,7 +398,7 @@ GET /api/mcp/graphs
 }
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts:90](../../../src/controllers/mcp.controller.ts#L90)
+**Source**: [src/controllers/mcp.controller.ts:90](../../../src/controllers/mcp.controller.ts#L90)
 
 ---
 
@@ -410,7 +410,7 @@ The controller is exported as a singleton instance:
 export const mcpController = new MCPController();
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts:116](../../../src/controllers/mcp.controller.ts#L116)
+**Source**: [src/controllers/mcp.controller.ts:116](../../../src/controllers/mcp.controller.ts#L116)
 
 ---
 
@@ -418,7 +418,7 @@ export const mcpController = new MCPController();
 
 ### Authentication Middleware
 
-**File**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts:7](../../../src/middleware/auth.middleware.ts#L7)
+**File**: [src/middleware/auth.middleware.ts:7](../../../src/middleware/auth.middleware.ts#L7)
 
 **Description**: Express middleware that validates API keys for MCP requests. Supports both header-based and query parameter authentication.
 
@@ -478,7 +478,7 @@ fetch('http://localhost:3000/api/mcp/context', {
 fetch('http://localhost:3000/api/mcp/graphs?apiKey=your-api-key');
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts:7](../../../src/middleware/auth.middleware.ts#L7)
+**Source**: [src/middleware/auth.middleware.ts:7](../../../src/middleware/auth.middleware.ts#L7)
 
 ---
 
@@ -486,7 +486,7 @@ fetch('http://localhost:3000/api/mcp/graphs?apiKey=your-api-key');
 
 ### MCP Protocol Types
 
-**File**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts](../../../src/models/mcp.types.ts)
+**File**: [src/models/mcp.types.ts](../../../src/models/mcp.types.ts)
 
 **Description**: TypeScript interfaces and types that define the Model Context Protocol request and response structures.
 
@@ -517,7 +517,7 @@ const request: MCPContextRequest = {
 };
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts:5](../../../src/models/mcp.types.ts#L5)
+**Source**: [src/models/mcp.types.ts:5](../../../src/models/mcp.types.ts#L5)
 
 ---
 
@@ -542,7 +542,7 @@ const options: MCPOptions = {
 };
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts:13](../../../src/models/mcp.types.ts#L13)
+**Source**: [src/models/mcp.types.ts:13](../../../src/models/mcp.types.ts#L13)
 
 ---
 
@@ -571,7 +571,7 @@ const response: MCPResponse = {
 };
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts:19](../../../src/models/mcp.types.ts#L19)
+**Source**: [src/models/mcp.types.ts:19](../../../src/models/mcp.types.ts#L19)
 
 ---
 
@@ -601,7 +601,7 @@ const metadata: MCPMetadata = {
 };
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts:24](../../../src/models/mcp.types.ts#L24)
+**Source**: [src/models/mcp.types.ts:24](../../../src/models/mcp.types.ts#L24)
 
 ---
 
@@ -637,13 +637,13 @@ const providerMetadata: MCPProviderMetadata = {
 };
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts:32](../../../src/models/mcp.types.ts#L32)
+**Source**: [src/models/mcp.types.ts:32](../../../src/models/mcp.types.ts#L32)
 
 ---
 
 ### Client Configuration Types
 
-**File**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp-client-config.ts](../../../src/models/mcp-client-config.ts)
+**File**: [src/models/mcp-client-config.ts](../../../src/models/mcp-client-config.ts)
 
 **Description**: Configuration interfaces for MCP server and client setups.
 
@@ -683,7 +683,7 @@ const serverConfig: MCPServerConfig = {
 };
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp-client-config.ts:5](../../../src/models/mcp-client-config.ts#L5)
+**Source**: [src/models/mcp-client-config.ts:5](../../../src/models/mcp-client-config.ts#L5)
 
 ---
 
@@ -721,7 +721,7 @@ const clientConfig: MCPClientConfig = {
 };
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp-client-config.ts:14](../../../src/models/mcp-client-config.ts#L14)
+**Source**: [src/models/mcp-client-config.ts:14](../../../src/models/mcp-client-config.ts#L14)
 
 ---
 
@@ -740,7 +740,7 @@ export const sampleMCPClientConfig: MCPClientConfig = {
 };
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp-client-config.ts:27](../../../src/models/mcp-client-config.ts#L27)
+**Source**: [src/models/mcp-client-config.ts:27](../../../src/models/mcp-client-config.ts#L27)
 
 **Sample MCP Server Config**:
 ```typescript
@@ -760,7 +760,7 @@ export const sampleMCPServerConfig: MCPServerConfig = {
 };
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp-client-config.ts:40](../../../src/models/mcp-client-config.ts#L40)
+**Source**: [src/models/mcp-client-config.ts:40](../../../src/models/mcp-client-config.ts#L40)
 
 ---
 
@@ -768,7 +768,7 @@ export const sampleMCPServerConfig: MCPServerConfig = {
 
 ### Connection Parser
 
-**File**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/utils/connection-parser.ts](../../../src/utils/connection-parser.ts)
+**File**: [src/utils/connection-parser.ts](../../../src/utils/connection-parser.ts)
 
 **Description**: Utility for parsing FalkorDB connection strings into structured configuration objects.
 
@@ -854,7 +854,7 @@ const config6 = parseFalkorDBConnectionString('');
 - Returns default values on parsing errors
 - Logs errors to console without throwing
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/utils/connection-parser.ts:19](../../../src/utils/connection-parser.ts#L19)
+**Source**: [src/utils/connection-parser.ts:19](../../../src/utils/connection-parser.ts#L19)
 
 ---
 
@@ -872,7 +872,7 @@ interface FalkorDBConnectionOptions {
 }
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/utils/connection-parser.ts:5](../../../src/utils/connection-parser.ts#L5)
+**Source**: [src/utils/connection-parser.ts:5](../../../src/utils/connection-parser.ts#L5)
 
 ---
 
@@ -880,7 +880,7 @@ interface FalkorDBConnectionOptions {
 
 ### Environment Variables
 
-**File**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts](../../../src/config/index.ts)
+**File**: [src/config/index.ts](../../../src/config/index.ts)
 
 **Description**: Centralized configuration management using environment variables loaded via dotenv.
 
@@ -959,7 +959,7 @@ FALKORDB_PASSWORD=secure_password_here
 MCP_API_KEY=production_api_key_here
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts:6](../../../src/config/index.ts#L6)
+**Source**: [src/config/index.ts:6](../../../src/config/index.ts#L6)
 
 ---
 
@@ -1000,7 +1000,7 @@ Status: 200 OK
 curl http://localhost:3000/
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts:18](../../../src/index.ts#L18)
+**Source**: [src/index.ts:18](../../../src/index.ts#L18)
 
 ---
 
@@ -1120,7 +1120,7 @@ curl -X POST http://localhost:3000/api/mcp/context \
   }'
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts:7](../../../src/routes/mcp.routes.ts#L7)
+**Source**: [src/routes/mcp.routes.ts:7](../../../src/routes/mcp.routes.ts#L7)
 
 ---
 
@@ -1160,7 +1160,7 @@ curl http://localhost:3000/api/mcp/metadata \
   -H "x-api-key: your-api-key"
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts:8](../../../src/routes/mcp.routes.ts#L8)
+**Source**: [src/routes/mcp.routes.ts:8](../../../src/routes/mcp.routes.ts#L8)
 
 ---
 
@@ -1202,7 +1202,7 @@ curl http://localhost:3000/api/mcp/graphs \
 curl "http://localhost:3000/api/mcp/graphs?apiKey=your-api-key"
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts:9](../../../src/routes/mcp.routes.ts#L9)
+**Source**: [src/routes/mcp.routes.ts:9](../../../src/routes/mcp.routes.ts#L9)
 
 ---
 
@@ -1233,7 +1233,7 @@ curl http://localhost:3000/api/mcp/health \
   -H "x-api-key: your-api-key"
 ```
 
-**Source**: [/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts:12](../../../src/routes/mcp.routes.ts#L12)
+**Source**: [src/routes/mcp.routes.ts:12](../../../src/routes/mcp.routes.ts#L12)
 
 ---
 

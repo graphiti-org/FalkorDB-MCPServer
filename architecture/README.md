@@ -80,11 +80,11 @@ The system enables AI models to:
 1. **Start here**: Read this README to understand the overall architecture
 2. **Read first**: [Architecture Diagrams](diagrams/02_architecture_diagrams.md) for visual system structure
 3. **Explore**: Follow this path through the code:
-   - `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts` - Application entry point
-   - `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts` - API endpoints
-   - `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts` - Request handling
-   - `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts` - Database operations
-   - `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts` - Type definitions
+   - `src/index.ts` - Application entry point
+   - `src/routes/mcp.routes.ts` - API endpoints
+   - `src/controllers/mcp.controller.ts` - Request handling
+   - `src/services/falkordb.service.ts` - Database operations
+   - `src/models/mcp.types.ts` - Type definitions
 
 #### Documentation Navigation
 
@@ -216,9 +216,9 @@ The system is organized into distinct layers, each with specific responsibilitie
 - Handle server lifecycle (startup, shutdown)
 
 **Key Files**:
-- `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts` (lines 8-48)
-- `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts` (lines 5-16)
-- `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts` (lines 7-25)
+- `src/index.ts` (lines 8-48)
+- `src/routes/mcp.routes.ts` (lines 5-16)
+- `src/middleware/auth.middleware.ts` (lines 7-25)
 
 #### 2. Business Logic Layer
 
@@ -237,8 +237,8 @@ The system is organized into distinct layers, each with specific responsibilitie
 - Handle errors and return appropriate HTTP status codes
 
 **Key Files**:
-- `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts` (lines 10-116)
-- `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts` (lines 5-38)
+- `src/controllers/mcp.controller.ts` (lines 10-116)
+- `src/models/mcp.types.ts` (lines 5-38)
 
 #### 3. Data Access Layer
 
@@ -257,8 +257,8 @@ The system is organized into distinct layers, each with specific responsibilitie
 - Gracefully close connections
 
 **Key Files**:
-- `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts` (lines 4-76)
-- `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/utils/connection-parser.ts` (lines 5-50)
+- `src/services/falkordb.service.ts` (lines 4-76)
+- `src/utils/connection-parser.ts` (lines 5-50)
 
 #### 4. External Systems
 
@@ -359,7 +359,7 @@ FalkorDB-MCPServer/
 
 #### 1. Application Entry Point (`index.ts`)
 
-- **File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`
+- **File**: `src/index.ts`
 - **Purpose**: Initialize Express application, configure middleware, register routes, manage server lifecycle
 - **Key Methods/Functions**:
   - Express app initialization (line 8)
@@ -373,7 +373,7 @@ FalkorDB-MCPServer/
 
 #### 2. FalkorDB Service (`falkordb.service.ts`)
 
-- **File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts`
+- **File**: `src/services/falkordb.service.ts`
 - **Purpose**: Manage FalkorDB database connections and execute graph operations
 - **Key Methods/Functions**:
   - `constructor()` (line 7): Initialize service and start connection
@@ -387,7 +387,7 @@ FalkorDB-MCPServer/
 
 #### 3. MCP Controller (`mcp.controller.ts`)
 
-- **File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`
+- **File**: `src/controllers/mcp.controller.ts`
 - **Purpose**: Handle MCP protocol requests, validate input, format responses
 - **Key Methods/Functions**:
   - `processContextRequest(req, res)` (line 14): Execute graph queries
@@ -399,7 +399,7 @@ FalkorDB-MCPServer/
 
 #### 4. Authentication Middleware (`auth.middleware.ts`)
 
-- **File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts`
+- **File**: `src/middleware/auth.middleware.ts`
 - **Purpose**: Validate API keys for MCP endpoint access
 - **Key Methods/Functions**:
   - `authenticateMCP(req, res, next)` (line 7): Check API key from header or query param
@@ -409,7 +409,7 @@ FalkorDB-MCPServer/
 
 #### 5. MCP Routes (`mcp.routes.ts`)
 
-- **File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts`
+- **File**: `src/routes/mcp.routes.ts`
 - **Purpose**: Define REST API endpoints and bind to controller methods
 - **Key Methods/Functions**: Route definitions:
   - `POST /context` (line 7): Execute graph queries
@@ -421,7 +421,7 @@ FalkorDB-MCPServer/
 
 #### 6. Configuration Module (`config/index.ts`)
 
-- **File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts`
+- **File**: `src/config/index.ts`
 - **Purpose**: Centralize environment variable access with defaults
 - **Key Methods/Functions**: Export `config` object with:
   - `server`: port (default 3000), nodeEnv (default 'development')
@@ -432,7 +432,7 @@ FalkorDB-MCPServer/
 
 #### 7. MCP Type Definitions (`mcp.types.ts`)
 
-- **File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts`
+- **File**: `src/models/mcp.types.ts`
 - **Purpose**: Define TypeScript interfaces for MCP protocol
 - **Key Types**:
   - `MCPContextRequest`: Graph query request structure
@@ -917,9 +917,9 @@ FalkorDB-MCPServer/
 - **Building an integration?** → Start with [API Reference](docs/04_api_reference.md) examples section
 
 **File Paths**:
-- All documentation: `/home/donbr/graphiti-org/FalkorDB-MCPServer/ra_output/architecture_20251129_171730/`
-- Source code: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/`
-- Tests: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/**/*.test.ts`
+- All documentation: `ra_output/architecture_20251129_171730/`
+- Source code: `src/`
+- Tests: `src/**/*.test.ts`
 
 ---
 

@@ -79,27 +79,27 @@ sequenceDiagram
 
 ### Flow Steps
 
-1. **Request Reception** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, lines 11-15)
+1. **Request Reception** (`src/index.ts`, lines 11-15)
    - Express server receives POST request at `/api/mcp/context`
    - JSON middleware parses request body
    - Authentication middleware is applied to all `/api/mcp/*` routes
 
-2. **Authentication** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts`, lines 7-24)
+2. **Authentication** (`src/middleware/auth.middleware.ts`, lines 7-24)
    - Extracts API key from `x-api-key` header or `apiKey` query parameter
    - In development mode without configured API key, authentication is skipped with warning
    - Validates API key against configured value
    - Returns 401 if missing, 403 if invalid, or calls `next()` if valid
 
-3. **Route Handling** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts`, line 7)
+3. **Route Handling** (`src/routes/mcp.routes.ts`, line 7)
    - Router matches POST `/context` endpoint
    - Binds request to `mcpController.processContextRequest` method
 
-4. **Request Validation** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`, lines 16-25)
+4. **Request Validation** (`src/controllers/mcp.controller.ts`, lines 16-25)
    - Controller validates presence of `query` field (returns 400 if missing)
    - Validates presence of `graphName` field (returns 400 if missing)
    - Extracts optional `params` object from request
 
-5. **Query Execution** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`, lines 27-34)
+5. **Query Execution** (`src/controllers/mcp.controller.ts`, lines 27-34)
    - Records start time for performance tracking
    - Calls `falkorDBService.executeQuery()` with graphName, query, and params
    - Service validates client is initialized (throws error if not)
@@ -107,13 +107,13 @@ sequenceDiagram
    - Executes Cypher query with parameters
    - Returns raw query results
 
-6. **Response Formatting** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`, lines 36-49)
+6. **Response Formatting** (`src/controllers/mcp.controller.ts`, lines 36-49)
    - Calculates query execution time
    - Wraps results in MCP response format with metadata
    - Metadata includes: timestamp, queryTime, provider name, source identifier
    - Returns 200 status with formatted response
 
-7. **Error Handling** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`, lines 50-58)
+7. **Error Handling** (`src/controllers/mcp.controller.ts`, lines 50-58)
    - Catches any errors during execution
    - Logs error to console with sanitized graph name
    - Returns 500 status with error message and timestamp metadata
@@ -129,12 +129,12 @@ sequenceDiagram
 
 ### Code References
 
-- Request entry point: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts:15`
-- Authentication middleware: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts:7-24`
-- Route definition: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts:7`
-- Controller logic: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts:14-58`
-- Service implementation: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:33-46`
-- Type definitions: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts:5-30`
+- Request entry point: `src/index.ts:15`
+- Authentication middleware: `src/middleware/auth.middleware.ts:7-24`
+- Route definition: `src/routes/mcp.routes.ts:7`
+- Controller logic: `src/controllers/mcp.controller.ts:14-58`
+- Service implementation: `src/services/falkordb.service.ts:33-46`
+- Type definitions: `src/models/mcp.types.ts:5-30`
 
 ---
 
@@ -182,19 +182,19 @@ sequenceDiagram
 
 ### Flow Steps
 
-1. **Request Reception** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, line 15)
+1. **Request Reception** (`src/index.ts`, line 15)
    - Express receives GET request at `/api/mcp/metadata`
    - Authentication middleware processes the request
 
-2. **Authentication** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts`, lines 7-24)
+2. **Authentication** (`src/middleware/auth.middleware.ts`, lines 7-24)
    - Same authentication flow as query execution
    - Validates API key from header or query parameter
 
-3. **Route Handling** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts`, line 8)
+3. **Route Handling** (`src/routes/mcp.routes.ts`, line 8)
    - Router matches GET `/metadata` endpoint
    - Binds to `mcpController.processMetadataRequest` method
 
-4. **Metadata Construction** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`, lines 66-78)
+4. **Metadata Construction** (`src/controllers/mcp.controller.ts`, lines 66-78)
    - Controller builds static metadata object
    - Includes provider name: "FalkorDB MCP Server"
    - Version: "1.0.0"
@@ -202,11 +202,11 @@ sequenceDiagram
    - Graph types: property graphs and directed graphs
    - Query languages: Cypher
 
-5. **Response** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`, line 80)
+5. **Response** (`src/controllers/mcp.controller.ts`, line 80)
    - Returns 200 status with metadata object
    - No database interaction required - purely informational
 
-6. **Error Handling** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`, lines 81-84)
+6. **Error Handling** (`src/controllers/mcp.controller.ts`, lines 81-84)
    - Catches any errors (unlikely for static data)
    - Logs and returns 500 with error message
 
@@ -221,9 +221,9 @@ sequenceDiagram
 
 ### Code References
 
-- Route definition: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts:8`
-- Controller implementation: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts:64-85`
-- Type definition: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts:32-38`
+- Route definition: `src/routes/mcp.routes.ts:8`
+- Controller implementation: `src/controllers/mcp.controller.ts:64-85`
+- Type definition: `src/models/mcp.types.ts:32-38`
 
 ---
 
@@ -285,39 +285,39 @@ sequenceDiagram
 
 ### Flow Steps
 
-1. **Request Reception** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, line 15)
+1. **Request Reception** (`src/index.ts`, line 15)
    - Express receives GET request at `/api/mcp/graphs`
    - Authentication middleware processes the request
 
-2. **Authentication** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts`, lines 7-24)
+2. **Authentication** (`src/middleware/auth.middleware.ts`, lines 7-24)
    - Validates API key using standard authentication flow
    - Ensures only authorized clients can list graphs
 
-3. **Route Handling** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts`, line 9)
+3. **Route Handling** (`src/routes/mcp.routes.ts`, line 9)
    - Router matches GET `/graphs` endpoint
    - Binds to `mcpController.listGraphs` method
 
-4. **Service Call** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`, line 92)
+4. **Service Call** (`src/controllers/mcp.controller.ts`, line 92)
    - Controller calls `falkorDBService.listGraphs()`
    - No parameters required
 
-5. **Database Query** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts`, lines 53-64)
+5. **Database Query** (`src/services/falkordb.service.ts`, lines 53-64)
    - Service checks client is initialized (throws if not)
    - Calls FalkorDB `client.list()` method
    - Returns array of graph name strings
    - Errors are logged and re-thrown
 
-6. **Data Transformation** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`, lines 94-100)
+6. **Data Transformation** (`src/controllers/mcp.controller.ts`, lines 94-100)
    - Maps simple string array to structured objects
    - Each graph name becomes an object: `{name: "graphName"}`
    - Placeholder for future enhancement (additional metadata per graph)
 
-7. **Response Formatting** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`, lines 102-108)
+7. **Response Formatting** (`src/controllers/mcp.controller.ts`, lines 102-108)
    - Wraps graph array in `data` field
    - Adds metadata with timestamp and count
    - Returns 200 status with structured response
 
-8. **Error Handling** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`, lines 109-112)
+8. **Error Handling** (`src/controllers/mcp.controller.ts`, lines 109-112)
    - Catches errors from service layer
    - Logs error details
    - Returns 500 with error message
@@ -333,9 +333,9 @@ sequenceDiagram
 
 ### Code References
 
-- Route definition: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts:9`
-- Controller implementation: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts:90-113`
-- Service implementation: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:53-64`
+- Route definition: `src/routes/mcp.routes.ts:9`
+- Controller implementation: `src/controllers/mcp.controller.ts:90-113`
+- Service implementation: `src/services/falkordb.service.ts:53-64`
 
 ---
 
@@ -385,32 +385,32 @@ sequenceDiagram
 
 ### Flow Steps
 
-1. **Middleware Registration** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, line 15)
+1. **Middleware Registration** (`src/index.ts`, line 15)
    - Authentication middleware is applied to all `/api/mcp` routes
    - Executes before any route handler
 
-2. **API Key Extraction** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts`, line 8)
+2. **API Key Extraction** (`src/middleware/auth.middleware.ts`, line 8)
    - Checks `x-api-key` header first
    - Falls back to `apiKey` query parameter
    - Supports both authentication methods for flexibility
 
-3. **Development Mode Check** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts`, lines 11-14)
+3. **Development Mode Check** (`src/middleware/auth.middleware.ts`, lines 11-14)
    - Checks if running in development environment
    - If no API key is configured in development, logs warning and skips authentication
    - Allows easier local development and testing
    - Production environments must have API key configured
 
-4. **Presence Validation** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts`, lines 16-18)
+4. **Presence Validation** (`src/middleware/auth.middleware.ts`, lines 16-18)
    - Returns 401 Unauthorized if no API key provided
    - Clear error message: "Missing API key"
    - Stops request processing immediately
 
-5. **Key Validation** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts`, lines 20-22)
+5. **Key Validation** (`src/middleware/auth.middleware.ts`, lines 20-22)
    - Compares provided key against configured key from environment
    - Returns 403 Forbidden if keys don't match
    - Clear error message: "Invalid API key"
 
-6. **Authorization Success** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts`, line 24)
+6. **Authorization Success** (`src/middleware/auth.middleware.ts`, line 24)
    - Calls `next()` to continue to route handler
    - Request proceeds to controller layer
 
@@ -426,9 +426,9 @@ sequenceDiagram
 
 ### Code References
 
-- Middleware implementation: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts:7-25`
-- Middleware registration: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts:15`
-- Configuration: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts:17-19`
+- Middleware implementation: `src/middleware/auth.middleware.ts:7-25`
+- Middleware registration: `src/index.ts:15`
+- Configuration: `src/config/index.ts:17-19`
 
 ---
 
@@ -492,16 +492,16 @@ sequenceDiagram
 ### Flow Steps
 
 1. **Validation Errors** (Multiple locations)
-   - **Missing query**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts:18-20`
+   - **Missing query**: `src/controllers/mcp.controller.ts:18-20`
      - Detected before any processing
      - Returns 400 with descriptive error
-   - **Missing graphName**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts:23-25`
+   - **Missing graphName**: `src/controllers/mcp.controller.ts:23-25`
      - Detected before database access
      - Returns 400 with descriptive error
-   - **Missing/Invalid API key**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts:16-22`
+   - **Missing/Invalid API key**: `src/middleware/auth.middleware.ts:16-22`
      - Returns 401/403 as appropriate
 
-2. **Service Layer Errors** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts`)
+2. **Service Layer Errors** (`src/services/falkordb.service.ts`)
    - **Client not initialized**: Lines 34-36, 54-56
      - Checked before any database operation
      - Throws error with clear message
@@ -546,10 +546,10 @@ sequenceDiagram
 
 ### Code References
 
-- Authentication errors: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts:16-22`
-- Validation errors: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts:18-25`
-- Service errors: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:34-36, 42-46, 54-56, 61-63`
-- Controller error handling: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts:50-58, 81-84, 109-112`
+- Authentication errors: `src/middleware/auth.middleware.ts:16-22`
+- Validation errors: `src/controllers/mcp.controller.ts:18-25`
+- Service errors: `src/services/falkordb.service.ts:34-36, 42-46, 54-56, 61-63`
+- Controller error handling: `src/controllers/mcp.controller.ts:50-58, 81-84, 109-112`
 
 ---
 
@@ -621,35 +621,35 @@ sequenceDiagram
 
 ### Flow Steps
 
-1. **Service Instantiation** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts`, lines 75-76)
+1. **Service Instantiation** (`src/services/falkordb.service.ts`, lines 75-76)
    - Singleton instance created at module load time
    - Constructor called automatically
    - Private client property initialized to null
 
-2. **Constructor Initialization** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts`, lines 7-9)
+2. **Constructor Initialization** (`src/services/falkordb.service.ts`, lines 7-9)
    - Constructor calls private `init()` method
    - Initialization happens asynchronously
    - Service available immediately (operations check client state)
 
-3. **Connection Setup** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts`, lines 11-31)
+3. **Connection Setup** (`src/services/falkordb.service.ts`, lines 11-31)
    - Loads configuration from environment (host, port, username, password)
    - Calls `FalkorDB.connect()` with socket and credentials
    - Awaits connection object
    - Performs ping test to verify connectivity
    - Logs success message
 
-4. **Connection Retry Logic** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts`, lines 26-30)
+4. **Connection Retry Logic** (`src/services/falkordb.service.ts`, lines 26-30)
    - If connection fails, error is logged
    - Sets 5-second timeout to retry initialization
    - Continues retrying until successful
    - Application remains running but operations will fail gracefully
 
-5. **Operation Validation** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts`, lines 34-36, 54-56)
+5. **Operation Validation** (`src/services/falkordb.service.ts`, lines 34-36, 54-56)
    - Every operation checks if client is initialized
    - Throws descriptive error if client is null
    - Prevents operations during initialization or after shutdown
 
-6. **Graceful Shutdown** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, lines 34-46)
+6. **Graceful Shutdown** (`src/index.ts`, lines 34-46)
    - Application listens for SIGTERM and SIGINT signals
    - Logs shutdown message
    - Calls `falkorDBService.close()`
@@ -657,7 +657,7 @@ sequenceDiagram
    - Sets client to null
    - Exits process with code 0
 
-7. **Close Method** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts`, lines 67-72)
+7. **Close Method** (`src/services/falkordb.service.ts`, lines 67-72)
    - Checks if client exists
    - Calls `client.close()` if present
    - Sets client to null to prevent further use
@@ -677,12 +677,12 @@ sequenceDiagram
 
 ### Code References
 
-- Service class: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:4-76`
-- Initialization: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:11-31`
-- Connection retry: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:26-30`
-- Shutdown handlers: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts:34-46`
-- Close method: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:67-72`
-- Configuration: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts:11-16`
+- Service class: `src/services/falkordb.service.ts:4-76`
+- Initialization: `src/services/falkordb.service.ts:11-31`
+- Connection retry: `src/services/falkordb.service.ts:26-30`
+- Shutdown handlers: `src/index.ts:34-46`
+- Close method: `src/services/falkordb.service.ts:67-72`
+- Configuration: `src/config/index.ts:11-16`
 
 ---
 
@@ -763,7 +763,7 @@ sequenceDiagram
 
 ### Flow Steps
 
-1. **Module Loading** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, lines 1-6)
+1. **Module Loading** (`src/index.ts`, lines 1-6)
    - Node.js loads index.ts entry point
    - Imports Express framework
    - Imports configuration module (which loads .env)
@@ -771,38 +771,38 @@ sequenceDiagram
    - Imports authentication middleware
    - Imports FalkorDB service (triggers singleton initialization)
 
-2. **Configuration Loading** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts`, lines 1-20)
+2. **Configuration Loading** (`src/config/index.ts`, lines 1-20)
    - dotenv.config() loads environment variables from .env file
    - Configuration object created with defaults
    - Server port, FalkorDB connection details, API key loaded
    - Exported for use throughout application
 
-3. **Express Initialization** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, line 8)
+3. **Express Initialization** (`src/index.ts`, line 8)
    - Creates Express application instance
    - Returns configured app object
 
-4. **Middleware Registration** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, lines 11-12)
+4. **Middleware Registration** (`src/index.ts`, lines 11-12)
    - `express.json()`: Parses JSON request bodies
    - `express.urlencoded({ extended: true })`: Parses URL-encoded bodies
    - Global middleware applied to all routes
 
-5. **Route Registration** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, line 15)
+5. **Route Registration** (`src/index.ts`, line 15)
    - Mounts MCP routes at `/api/mcp` path
    - Authentication middleware applied to all MCP routes
    - Routes imported from separate module for organization
 
-6. **Root Route** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, lines 18-24)
+6. **Root Route** (`src/index.ts`, lines 18-24)
    - GET `/` endpoint for health/info check
    - Returns server name, version, and status
    - No authentication required for basic info
 
-7. **Server Start** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, lines 27-31)
+7. **Server Start** (`src/index.ts`, lines 27-31)
    - Retrieves port from configuration
    - Calls `app.listen(PORT)` to bind to port
    - Logs startup message with port and environment
    - Server now accepting connections
 
-8. **Signal Handlers** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, lines 34-46)
+8. **Signal Handlers** (`src/index.ts`, lines 34-46)
    - Registers SIGTERM handler (graceful shutdown from orchestrator)
    - Registers SIGINT handler (Ctrl+C from terminal)
    - Both handlers follow same pattern:
@@ -810,7 +810,7 @@ sequenceDiagram
      - Close database connections
      - Exit with code 0 (success)
 
-9. **Module Export** (`/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`, line 48)
+9. **Module Export** (`src/index.ts`, line 48)
    - Exports app for testing purposes
    - Allows test suites to import and test the application
 
@@ -828,11 +828,11 @@ sequenceDiagram
 
 ### Code References
 
-- Main entry point: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts:1-48`
-- Configuration loading: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts:1-20`
-- Route definitions: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts:1-16`
-- Authentication middleware: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts:1-25`
-- Service initialization: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts:75-76`
+- Main entry point: `src/index.ts:1-48`
+- Configuration loading: `src/config/index.ts:1-20`
+- Route definitions: `src/routes/mcp.routes.ts:1-16`
+- Authentication middleware: `src/middleware/auth.middleware.ts:1-25`
+- Service initialization: `src/services/falkordb.service.ts:75-76`
 
 ---
 
@@ -963,7 +963,7 @@ sequenceDiagram
 
 #### MCPContextRequest
 ```typescript
-// File: /home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts:5-11
+// File: src/models/mcp.types.ts:5-11
 interface MCPContextRequest {
   graphName: string;        // Required: Name of the graph to query
   query: string;            // Required: Cypher query to execute
@@ -990,7 +990,7 @@ interface MCPContextRequest {
 
 #### MCPOptions
 ```typescript
-// File: /home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts:13-17
+// File: src/models/mcp.types.ts:13-17
 interface MCPOptions {
   timeout?: number;         // Query timeout in milliseconds
   maxResults?: number;      // Maximum number of results to return
@@ -1002,7 +1002,7 @@ interface MCPOptions {
 
 #### MCPResponse
 ```typescript
-// File: /home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts:19-22
+// File: src/models/mcp.types.ts:19-22
 interface MCPResponse {
   data: any;                // Query results or response data
   metadata: MCPMetadata;    // Response metadata
@@ -1047,7 +1047,7 @@ interface MCPResponse {
 
 #### MCPMetadata
 ```typescript
-// File: /home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts:24-30
+// File: src/models/mcp.types.ts:24-30
 interface MCPMetadata {
   timestamp: string;        // ISO 8601 timestamp
   queryTime: number;        // Execution time in milliseconds
@@ -1059,7 +1059,7 @@ interface MCPMetadata {
 
 #### MCPProviderMetadata
 ```typescript
-// File: /home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts:32-38
+// File: src/models/mcp.types.ts:32-38
 interface MCPProviderMetadata {
   provider: string;         // Provider name
   version: string;          // Server version
@@ -1105,7 +1105,7 @@ interface MCPProviderMetadata {
 
 #### FalkorDB Connection Configuration
 ```typescript
-// File: /home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts:11-16
+// File: src/config/index.ts:11-16
 const falkorDB = {
   host: string;      // FalkorDB host (default: 'localhost')
   port: number;      // FalkorDB port (default: 6379)
@@ -1116,7 +1116,7 @@ const falkorDB = {
 
 #### Server Configuration
 ```typescript
-// File: /home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts:7-10
+// File: src/config/index.ts:7-10
 const server = {
   port: number | string;  // Server port (default: 3000)
   nodeEnv: string;        // Environment (default: 'development')
@@ -1125,7 +1125,7 @@ const server = {
 
 #### MCP Configuration
 ```typescript
-// File: /home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts:17-19
+// File: src/config/index.ts:17-19
 const mcp = {
   apiKey: string;  // API key for authentication (empty string if not set)
 }
@@ -1133,7 +1133,7 @@ const mcp = {
 
 #### Connection Parser Types
 ```typescript
-// File: /home/donbr/graphiti-org/FalkorDB-MCPServer/src/utils/connection-parser.ts:5-10
+// File: src/utils/connection-parser.ts:5-10
 interface FalkorDBConnectionOptions {
   host: string;
   port: number;
@@ -1184,17 +1184,17 @@ GET /api/mcp/metadata?apiKey=your_api_key_here
 
 ### Source Files Referenced
 
-1. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts` - Main application entry point
-2. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts` - MCP request handlers
-3. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts` - Database service layer
-4. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts` - Route definitions
-5. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts` - Authentication logic
-6. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts` - Type definitions
-7. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts` - Configuration management
-8. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/utils/connection-parser.ts` - Connection string parsing
-9. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp-client-config.ts` - Client configuration types
+1. `src/index.ts` - Main application entry point
+2. `src/controllers/mcp.controller.ts` - MCP request handlers
+3. `src/services/falkordb.service.ts` - Database service layer
+4. `src/routes/mcp.routes.ts` - Route definitions
+5. `src/middleware/auth.middleware.ts` - Authentication logic
+6. `src/models/mcp.types.ts` - Type definitions
+7. `src/config/index.ts` - Configuration management
+8. `src/utils/connection-parser.ts` - Connection string parsing
+9. `src/models/mcp-client-config.ts` - Client configuration types
 
 ### Test Files Referenced
 
-1. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.test.ts`
-2. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.test.ts`
+1. `src/controllers/mcp.controller.test.ts`
+2. `src/services/falkordb.service.test.ts`

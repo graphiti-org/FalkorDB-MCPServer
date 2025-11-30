@@ -24,7 +24,7 @@ The FalkorDB MCP Server is a **hybrid TypeScript/Python project** that implement
 ### Python Modules
 
 #### main.py
-**File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/main.py`
+**File**: `main.py`
 **Purpose**: Simple Python entry point demonstrating basic project setup
 
 **Functions**:
@@ -42,7 +42,7 @@ The FalkorDB MCP Server is a **hybrid TypeScript/Python project** that implement
 ### Core Application
 
 #### index.ts (Main Application Entry Point)
-**File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`
+**File**: `src/index.ts`
 **Purpose**: Express application initialization, middleware configuration, and server lifecycle management
 
 **Key Components**:
@@ -69,7 +69,7 @@ The FalkorDB MCP Server is a **hybrid TypeScript/Python project** that implement
 ### Configuration
 
 #### config/index.ts
-**File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts`
+**File**: `src/config/index.ts`
 **Purpose**: Centralized configuration management using environment variables
 
 **Exports**:
@@ -89,7 +89,7 @@ The FalkorDB MCP Server is a **hybrid TypeScript/Python project** that implement
 ### Controllers
 
 #### controllers/mcp.controller.ts
-**File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts`
+**File**: `src/controllers/mcp.controller.ts`
 **Purpose**: Handles MCP API request processing and response formatting
 
 **Class**: `MCPController`
@@ -129,7 +129,7 @@ The FalkorDB MCP Server is a **hybrid TypeScript/Python project** that implement
 ### Services
 
 #### services/falkordb.service.ts
-**File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts`
+**File**: `src/services/falkordb.service.ts`
 **Purpose**: FalkorDB database connection and query execution service
 
 **Class**: `FalkorDBService`
@@ -179,7 +179,7 @@ The FalkorDB MCP Server is a **hybrid TypeScript/Python project** that implement
 ### Routes
 
 #### routes/mcp.routes.ts
-**File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts`
+**File**: `src/routes/mcp.routes.ts`
 **Purpose**: Define MCP API endpoints and route handlers
 
 **Routes**:
@@ -201,7 +201,7 @@ The FalkorDB MCP Server is a **hybrid TypeScript/Python project** that implement
 ### Middleware
 
 #### middleware/auth.middleware.ts
-**File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts`
+**File**: `src/middleware/auth.middleware.ts`
 **Purpose**: Authentication middleware for MCP API requests
 
 **Function**: `authenticateMCP` (line 7)
@@ -229,7 +229,7 @@ The FalkorDB MCP Server is a **hybrid TypeScript/Python project** that implement
 ### Models (Type Definitions)
 
 #### models/mcp.types.ts
-**File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts`
+**File**: `src/models/mcp.types.ts`
 **Purpose**: TypeScript type definitions for MCP protocol
 
 **Interfaces**:
@@ -268,7 +268,7 @@ The FalkorDB MCP Server is a **hybrid TypeScript/Python project** that implement
 ---
 
 #### models/mcp-client-config.ts
-**File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp-client-config.ts`
+**File**: `src/models/mcp-client-config.ts`
 **Purpose**: Configuration types and samples for MCP client/server setup
 
 **Interfaces**:
@@ -293,7 +293,7 @@ The FalkorDB MCP Server is a **hybrid TypeScript/Python project** that implement
 ### Utilities
 
 #### utils/connection-parser.ts
-**File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/utils/connection-parser.ts`
+**File**: `src/utils/connection-parser.ts`
 **Purpose**: Parse FalkorDB connection strings
 
 **Interface**: `FalkorDBConnectionOptions` (line 5)
@@ -352,7 +352,7 @@ No dedicated helper classes exist. The codebase uses:
 ### Main Entry Points
 
 #### TypeScript Application Entry Point
-**File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts`
+**File**: `src/index.ts`
 **Type**: Express.js server application
 **Port**: Configurable via PORT environment variable (default: 3000)
 **Startup**:
@@ -375,7 +375,7 @@ app.listen(PORT, () => {
 - `npm run lint`: ESLint type checking
 
 #### Python Entry Point
-**File**: `/home/donbr/graphiti-org/FalkorDB-MCPServer/main.py`
+**File**: `main.py`
 **Type**: Standalone Python script
 **Execution**: `python main.py` or `python3 main.py`
 **Functionality**: Prints "Hello from falkordb-mcpserver!"
@@ -498,28 +498,28 @@ Standalone modules:
 ## File Reference Index
 
 ### Python Files
-1. `/home/donbr/graphiti-org/FalkorDB-MCPServer/main.py` - Simple hello-world entry point
+1. `main.py` - Simple hello-world entry point
 
 ### TypeScript Application Files
-1. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/index.ts` - Main application entry point
-2. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.ts` - Configuration management
-3. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.ts` - MCP request handlers
-4. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.ts` - FalkorDB service layer
-5. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/routes/mcp.routes.ts` - API route definitions
-6. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/middleware/auth.middleware.ts` - Authentication middleware
-7. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp.types.ts` - MCP type definitions
-8. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/models/mcp-client-config.ts` - Client configuration types
-9. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/utils/connection-parser.ts` - Connection string parser
+1. `src/index.ts` - Main application entry point
+2. `src/config/index.ts` - Configuration management
+3. `src/controllers/mcp.controller.ts` - MCP request handlers
+4. `src/services/falkordb.service.ts` - FalkorDB service layer
+5. `src/routes/mcp.routes.ts` - API route definitions
+6. `src/middleware/auth.middleware.ts` - Authentication middleware
+7. `src/models/mcp.types.ts` - MCP type definitions
+8. `src/models/mcp-client-config.ts` - Client configuration types
+9. `src/utils/connection-parser.ts` - Connection string parser
 
 ### TypeScript Test Files
-10. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/config/index.test.ts` - Configuration tests
-11. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/services/falkordb.service.test.ts` - Service tests
-12. `/home/donbr/graphiti-org/FalkorDB-MCPServer/src/controllers/mcp.controller.test.ts` - Controller tests
+10. `src/config/index.test.ts` - Configuration tests
+11. `src/services/falkordb.service.test.ts` - Service tests
+12. `src/controllers/mcp.controller.test.ts` - Controller tests
 
 ### Configuration Files
-13. `/home/donbr/graphiti-org/FalkorDB-MCPServer/package.json` - Node.js project configuration
-14. `/home/donbr/graphiti-org/FalkorDB-MCPServer/pyproject.toml` - Python project configuration
-15. `/home/donbr/graphiti-org/FalkorDB-MCPServer/tsconfig.json` - TypeScript compiler configuration
+13. `package.json` - Node.js project configuration
+14. `pyproject.toml` - Python project configuration
+15. `tsconfig.json` - TypeScript compiler configuration
 
 ---
 
